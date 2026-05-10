@@ -1,54 +1,22 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class AuthService {
+  final _auth = Supabase.instance.client.auth;
+  final _db = Supabase.instance.client;
 
-  final FirebaseAuth _auth = FirebaseAuth.instance;
-  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  User? getCurrentUser() => _auth.currentUser;
 
-  User? getCurrentUser() {
-    return _auth.currentUser;
+  Future<void> signInWithEmailPassword(String email, String password) async {
+    await _auth.signInWithPassword(email: email, password: password);
   }
 
-  Future<UserCredential> signInWithEmailPassword(
-      String email,
-      String password) async {
-    try {
-      return await _auth.signInWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
-    } on FirebaseAuthException catch (e) {
-      throw Exception(e.code);
-    }
+  Future<void> signUpWithEmailPassword(String email, String password) async {
+    final res = await _auth.signUp(email: email, password: password);
+    await _db.from('users').insert({
+      'id': res.user!.id,
+      'email': email,
+    });
   }
 
-  Future<UserCredential> signUpWithEmailPassword(
-      String email,
-      String password) async {
-    try {
-      UserCredential userCredential =
-      await _auth.createUserWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
-
-      await _firestore
-          .collection("Users")
-          .doc(userCredential.user!.uid)
-          .set({
-        'uid': userCredential.user!.uid,
-        'email': email,
-      });
-
-      return userCredential;
-
-    } on FirebaseAuthException catch (e) {
-      throw Exception(e.code);
-    }
-  }
-
-  Future<void> signOut() async {
-    await _auth.signOut();
-  }
+  Future<void> signOut() async => await _auth.signOut();
 }

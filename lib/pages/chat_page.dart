@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:message_app_flutter/Services/authentication/auth_service.dart';
 import 'package:message_app_flutter/Services/chat/chat_services.dart';
@@ -109,68 +108,37 @@ class _ChatPageState extends State<ChatPage> {
   }
 
   Widget _buildMessageList() {
-    String senderID =
-        _authService.getCurrentUser()!.uid;
+  String senderID = _authService.getCurrentUser()!.id;
 
-    return StreamBuilder<QuerySnapshot>(
-      stream: _chatService.getMessages(
-        widget.receiverID,
-        senderID,
-      ),
-      builder: (context, snapshot) {
-        if (snapshot.hasError) {
-          return const Center(
-            child: Text("Error"),
-          );
-        }
+  return StreamBuilder<List<Map<String, dynamic>>>(
+    stream: _chatService.getMessages(widget.receiverID, senderID),
+    builder: (context, snapshot) {
+      if (snapshot.hasError) return const Center(child: Text("Error"));
+      if (snapshot.connectionState == ConnectionState.waiting) return const Center(child: CircularProgressIndicator());
+      if (!snapshot.hasData) return const SizedBox();
 
-        if (snapshot.connectionState ==
-            ConnectionState.waiting) {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
-        }
+      WidgetsBinding.instance.addPostFrameCallback((_) => scrollDown());
 
-        if (!snapshot.hasData) {
-          return const SizedBox();
-        }
+      return ListView(
+        controller: _scrollController,
+        children: snapshot.data!.map((doc) => _buildMessageItem(doc)).toList(),
+      );
+    },
+  );
+}
 
-        WidgetsBinding.instance.addPostFrameCallback((_) {
-          scrollDown();
-        });
+  Widget _buildMessageItem(Map<String, dynamic> data) {
+  bool isCurrentUser = data['sender_id'] == _authService.getCurrentUser()!.id;
 
-        return ListView(
-          controller: _scrollController,
-          children: snapshot.data!.docs
-              .map((doc) => _buildMessageItem(doc))
-              .toList(),
-        );
-      },
-    );
-  }
-
-  Widget _buildMessageItem(DocumentSnapshot doc) {
-    Map<String, dynamic> data =
-    doc.data() as Map<String, dynamic>;
-
-    bool isCurrentUser =
-        data['senderID'] ==
-            _authService.getCurrentUser()!.uid;
-
-    return Container(
-      alignment: isCurrentUser
-          ? Alignment.centerRight
-          : Alignment.centerLeft,
-      margin: const EdgeInsets.symmetric(
-        vertical: 4,
-        horizontal: 8,
-      ),
-      child: ChatBubble(
-        message: data["message"],
-        isCurrentUser: isCurrentUser,
-      ),
-    );
-  }
+  return Container(
+    alignment: isCurrentUser ? Alignment.centerRight : Alignment.centerLeft,
+    margin: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+    child: ChatBubble(
+      message: data["message"],
+      isCurrentUser: isCurrentUser,
+    ),
+  );
+}
 
   Widget _buildUserInput() {
     return Padding(

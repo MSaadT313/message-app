@@ -14,35 +14,35 @@ final void Function()? onTap;
     this.onTap,
     super.key
   });
-  void register(BuildContext context)async{
-    //get auth service
-    final auth = AuthService();
-    //password match we create a user
-    if(pwdController.text == _confirmpwdController.text){
-      try{
-        await auth.signUpWithEmailPassword(
-          emailController.text, pwdController.text,
-        );
-      }catch (e){
+    void register(BuildContext context)async{
+      //get auth service
+      final auth = AuthService();
+      //password match we create a user
+      if(pwdController.text == _confirmpwdController.text){
+        try{
+          await auth.signUpWithEmailPassword(
+            emailController.text, pwdController.text,
+          );
+        }catch (e){
+          showDialog(
+              context: context,
+              builder: (context) => AlertDialog(
+                title: Text(e.toString()),
+              ),
+          );
+        }
+      }
+      //if the password donot match we show error to the user to try again
+      else{
         showDialog(
             context: context,
             builder: (context) => AlertDialog(
-              title: Text(e.toString()),
+              title: Text("Password donot match!"),
             ),
         );
       }
+      
     }
-    //if the password donot match we show error to the user to try again
-    else{
-      showDialog(
-          context: context,
-          builder: (context) => AlertDialog(
-            title: Text("Password donot match!"),
-          ),
-      );
-    }
-    
-  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
