@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:message_app_flutter/authentication/auth_service.dart';
+import 'package:message_app_flutter/Services/authentication/auth_service.dart';
 import '../components/my_button.dart';
 import '../components/my_textfield.dart';
 class RegisterPage extends StatelessWidget{
@@ -87,9 +87,7 @@ final void Function()? onTap;
               ),
               const SizedBox(height: 10,),
 
-
-
-              my_button(
+              MyButton(
             text: "Register",
             onTap: () => register(context),
             ),

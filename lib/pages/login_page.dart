@@ -1,19 +1,26 @@
- import 'package:flutter/material.dart';
-import 'package:message_app_flutter/authentication/auth_service.dart';
+import 'package:flutter/material.dart';
+import 'package:message_app_flutter/Services/authentication/auth_service.dart';
 import 'package:message_app_flutter/components/my_textfield.dart';
 import 'package:message_app_flutter/components/my_button.dart';
 
-class LoginPage extends StatelessWidget{
+class LoginPage extends StatefulWidget{
 
-  //email and password controller
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController pwdController = TextEditingController();
   final void Function()? onTap;
 
    LoginPage({
      required this.onTap,
       super.key,
    });
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  //email and password controller
+  final TextEditingController emailController = TextEditingController();
+
+  final TextEditingController pwdController = TextEditingController();
 
    //login method
   void login(BuildContext context) async{
@@ -26,13 +33,13 @@ class LoginPage extends StatelessWidget{
       showDialog(
         context: context,
         builder: (context) => AlertDialog(
-          title: Text(e.toString()),
+          title: const Text("Login Failed"),
+          content: Text(e.toString()),
       ),
       );
     }
 
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +78,7 @@ class LoginPage extends StatelessWidget{
             controller: pwdController,
           ),
           const SizedBox(height: 10,),
-          my_button(
+          MyButton(
             text: "Login",
             onTap: () => login(context),
           ),
@@ -84,7 +91,7 @@ class LoginPage extends StatelessWidget{
               Text("Not a member? ",
               style: TextStyle(color: Theme.of(context).colorScheme.primary),),
               GestureDetector(
-                onTap: onTap,
+                onTap: () => FocusScope.of(context).unfocus(),
                 child: Text("Register Now",
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
@@ -94,9 +101,6 @@ class LoginPage extends StatelessWidget{
               )
             ],
           )
-
-
-
         ],
       ),
       ),

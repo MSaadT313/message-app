@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:message_app_flutter/authentication/auth_service.dart';
+import 'package:message_app_flutter/Services/authentication/auth_service.dart';
 
 import '../pages/settings_page.dart';
 
