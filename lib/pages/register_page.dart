@@ -14,13 +14,13 @@ final void Function()? onTap;
     this.onTap,
     super.key
   });
-  void register(BuildContext context){
+  void register(BuildContext context)async{
     //get auth service
-    final _auth = AuthService();
+    final auth = AuthService();
     //password match we create a user
     if(pwdController.text == _confirmpwdController.text){
       try{
-        _auth.signUpWithEmailPassword(
+        await auth.signUpWithEmailPassword(
           emailController.text, pwdController.text,
         );
       }catch (e){
@@ -47,7 +47,7 @@ final void Function()? onTap;
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
-      body: Container(
+      body: SizedBox(
         width: double.infinity,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

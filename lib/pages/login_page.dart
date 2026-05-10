@@ -7,7 +7,7 @@ class LoginPage extends StatefulWidget{
 
   final void Function()? onTap;
 
-   LoginPage({
+   const LoginPage({
      required this.onTap,
       super.key,
    });
@@ -26,18 +26,20 @@ class _LoginPageState extends State<LoginPage> {
   void login(BuildContext context) async{
     //auth service
     final authService = AuthService();
+    final nav=Navigator.of(context);
     try{
       await authService.signInWithEmailPassword(emailController.text, pwdController.text,);
     }
-    catch (e){
-      showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-          title: const Text("Login Failed"),
-          content: Text(e.toString()),
-      ),
-      );
-    }
+      catch (e){
+        if(!mounted)return;
+        showDialog(
+          context: nav.context,
+          builder: (context) => AlertDialog(
+            title: const Text("Login Failed"),
+            content: Text(e.toString()),
+        ),
+        );
+      }
 
   }
 
@@ -45,7 +47,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
-      body: Container(
+      body: SizedBox(
         width: double.infinity,
         child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -91,7 +93,7 @@ class _LoginPageState extends State<LoginPage> {
               Text("Not a member? ",
               style: TextStyle(color: Theme.of(context).colorScheme.primary),),
               GestureDetector(
-                onTap: () => FocusScope.of(context).unfocus(),
+                onTap: widget.onTap,
                 child: Text("Register Now",
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
