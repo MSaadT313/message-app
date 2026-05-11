@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "174859643162",
+    "project_id": "messageapp-b584c",
+    "storage_bucket": "messageapp-b584c.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:174859643162:android:451d0e2e7bcb3b6a9c64a3",
+        "android_client_info": {
+          "package_name": "com.example.message_app_flutter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "174859643162-0qdgt7ogukifb8cd448p3u8s9vi6cil8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCBGX5R7QjnaaUK1nmK1v_044NHrO8PDcQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "174859643162-0qdgt7ogukifb8cd448p3u8s9vi6cil8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
