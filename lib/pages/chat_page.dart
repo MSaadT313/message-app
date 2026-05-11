@@ -118,7 +118,7 @@ class _ChatPageState extends State<ChatPage> {
         children: [
           Expanded(
             child: MyTextfield(
-              hintText: "Type a message",
+              hintText: "اپنا پیغام پہنچائیں",
               obscureText: false,
               controller: _messageController,
               focusNode: myFocusNode,

@@ -32,7 +32,7 @@ void logout(){
             Padding(
               padding: const EdgeInsets.only(left: 25.0),
               child: ListTile(
-                title: Text("H O M E"),
+                title: Text("واپسی"),
                 leading: Icon(Icons.home),
                 onTap:(){
                   //pop the drawer
@@ -43,7 +43,7 @@ void logout(){
             Padding(
               padding: const EdgeInsets.only(left: 25.0),
               child: ListTile(
-                title: Text("S E T T I N G "),
+                title: Text("تبدیلی"),
                 leading: Icon(Icons.settings),
                 onTap:(){
                   Navigator.pop(context);
@@ -60,7 +60,7 @@ void logout(){
           Padding(
             padding: const EdgeInsets.only(left: 25.0, bottom: 40),
             child: ListTile(
-              title: Text(" L O G O U T "),
+              title: Text(" لاگ آؤٹ "),
               leading: Icon(Icons.logout),
               onTap: logout,
             ),

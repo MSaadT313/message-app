@@ -37,7 +37,7 @@ final void Function()? onTap;
         showDialog(
             context: context,
             builder: (context) => AlertDialog(
-              title: Text("Password donot match!"),
+              title: Text("آپ نے مختلف پاس ورڈ لکھا ہے"),
             ),
         );
       }
@@ -61,7 +61,7 @@ final void Function()? onTap;
               ),
               const SizedBox(height: 29,),
               //welcome back message
-              Text("Lets start an account for you.",
+              Text("آپ کے لیے اکاؤنٹ شروع کرتے ہیں.",
               style: TextStyle(
               color: Theme.of(context).colorScheme.primary,
               fontSize : 16,
@@ -69,26 +69,26 @@ final void Function()? onTap;
             ),
             const SizedBox(height: 29,),
             MyTextfield(
-            hintText: "Email",
+            hintText: "ای میل",
             obscureText: false,
             controller: emailController,
             ),
             const SizedBox(height: 10,),
             MyTextfield(
-            hintText: "Password",
+            hintText: "پاس ورڈ",
             obscureText: true,
             controller: pwdController,
             ),
             const SizedBox(height: 10,),
               MyTextfield(
-                hintText: "Confirm Password",
+                hintText: "پاس ورڈ دوبارہ لکھیں",
                 obscureText: true,
                 controller: _confirmpwdController,
               ),
               const SizedBox(height: 10,),
 
               MyButton(
-            text: "Register",
+            text: "دستخط کریں",
             onTap: () => register(context),
             ),
 
@@ -97,11 +97,11 @@ final void Function()? onTap;
             Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-            Text("Already have an account ",
+            Text("پہلے سے اکاؤنٹ ہے؟ ",
             style: TextStyle(color: Theme.of(context).colorScheme.primary),),
             GestureDetector(
               onTap: onTap,
-              child: Text("Login Now",
+              child: Text("ابھی لاگ ان کریں",
               style: TextStyle(
               fontWeight: FontWeight.bold,
               color: Theme.of(context).colorScheme.primary,

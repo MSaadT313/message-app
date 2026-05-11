@@ -11,7 +11,7 @@ class SettingsPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: AppBar(
-        title: Text("Settings"),
+        title: Text("تبدیلی"),
         backgroundColor: Colors.transparent,
         foregroundColor: Colors.grey,
         elevation: 0,
@@ -28,7 +28,7 @@ class SettingsPage extends StatelessWidget {
 
           children: [
             //dark Mode
-            Text("Dark Mode"),
+            Text("اندھیرا"),
 
 
             //switch

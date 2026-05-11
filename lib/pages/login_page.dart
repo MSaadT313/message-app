@@ -35,7 +35,7 @@ class _LoginPageState extends State<LoginPage> {
         showDialog(
           context: nav.context,
           builder: (context) => AlertDialog(
-            title: const Text("Login Failed"),
+            title: const Text("تصدیق ناکام ہوگئی"),
             content: Text(e.toString()),
         ),
         );
@@ -61,7 +61,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
           const SizedBox(height: 29,),
           //welcome back message
-          Text("Welcome Back!!",
+          Text("خوش آمدید",
           style: TextStyle(
               color: Theme.of(context).colorScheme.primary,
               fontSize : 16,
@@ -69,19 +69,19 @@ class _LoginPageState extends State<LoginPage> {
     ),
           const SizedBox(height: 29,),
           MyTextfield(
-            hintText: "Email",
+            hintText: "ای میل",
             obscureText: false,
             controller: emailController,
           ),
           const SizedBox(height: 10,),
           MyTextfield(
-            hintText: "Password",
+            hintText: "پاس ورڈ",
             obscureText: true,
             controller: pwdController,
           ),
           const SizedBox(height: 10,),
           MyButton(
-            text: "Login",
+            text: "لاگ ان کریں",
             onTap: () => login(context),
           ),
 
@@ -90,11 +90,11 @@ class _LoginPageState extends State<LoginPage> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text("Not a member? ",
+              Text("اکاؤنٹ نہیں؟ ",
               style: TextStyle(color: Theme.of(context).colorScheme.primary),),
               GestureDetector(
                 onTap: widget.onTap,
-                child: Text("Register Now",
+                child: Text("رجسٹر کریں",
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     color: Theme.of(context).colorScheme.primary,
