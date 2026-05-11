@@ -10,7 +10,7 @@ class ChatServices {
 
   Future<void> sendMessage(String receiverID, String message) async {
     final currentUserID = _auth.currentUser!.id;
-    final currentUserEmail = _auth.currentUser!.email!;
+    //final currentUserEmail = _auth.currentUser!.email!;
     List<String> ids = [currentUserID, receiverID];
     ids.sort();
     String chatRoomID = ids.join('_');
