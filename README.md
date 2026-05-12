@@ -64,12 +64,12 @@ The app allows registered users to send and receive instant messages in private 
 
 | Feature | Status | Description |
 |---|---|---|
-| 🔐 Email Authentication | ✅ Live | Secure sign-up & login via Supabase Auth |
+| 🔐 Email Authentication | 🔄 Planned) | Secure sign-up & login via Supabase Auth |
 | 💬 Real-Time Messaging | ✅ Live | Messages stream instantly using Supabase Realtime |
 | 👥 Contact List | ✅ Live | All registered users listed on the home screen |
 | 🌙 Dark / Light Mode | ✅ Live | Persistent theme toggle in Settings |
-| 🔒 Row Level Security | ✅ Live | Users can only access their own messages |
-| 📱 Cross-Platform | ✅ Live | Runs on Android, iOS, Web, Windows, macOS |
+| 🔒 Row Level Security | 🔄 Planned| Users can only access their own messages |
+| 📱 Cross-Platform | ✅🔄halfway| Runs on Android, iOS, Web. does not run on Windows, macOS,Linux |
 | 🔔 Push Notifications | 🔄 Planned | Via Firebase Cloud Messaging |
 | 👤 User Profiles | 🔄 Planned | Avatars, usernames, bio |
 | 📎 Media Messages | 🔄 Planned | Image/file sharing via Supabase Storage |
@@ -219,7 +219,7 @@ dependencies:
 
 ## 🗄 Database Schema
 
-The app uses two tables in Supabase (PostgreSQL):
+The app uses three tables in Supabase (PostgreSQL):
 
 ### `public.users`
 
@@ -227,25 +227,32 @@ The app uses two tables in Supabase (PostgreSQL):
 |---|---|---|---|
 | `id` | `UUID` | PK, FK → auth.users | Supabase Auth user ID |
 | `email` | `TEXT` | NOT NULL | User's email address |
-| `created_at` | `TIMESTAMPTZ` | DEFAULT NOW() | Account creation time |
+| `contact_key` | `TEXT` | UNIQUE, NOT NULL | Public key for adding friends |
 
 ### `public.messages`
 
 | Column | Type | Constraints | Description |
 |---|---|---|---|
 | `id` | `UUID` | PK, DEFAULT gen_random_uuid() | Unique message ID |
-| `sender_id` | `UUID` | FK → auth.users | Who sent the message |
-| `receiver_id` | `UUID` | FK → auth.users | Who receives the message |
+| `sender_id` | `UUID` | FK → users.id | Who sent the message |
+| `receiver_id` | `UUID` | FK → users.id | Who receives the message |
 | `chat_room_id` | `TEXT` | NOT NULL, Indexed | Sorted UUID pair: `"uid1_uid2"` |
 | `message` | `TEXT` | NOT NULL | Message content |
 | `timestamp` | `TIMESTAMPTZ` | DEFAULT NOW() | Time sent |
+
+### `public.friends`
+
+| Column | Type | Constraints | Description |
+|---|---|---|---|
+| `user1` | `TEXT` | FK → users.contact_key | Contact key of first user |
+| `user2` | `TEXT` | FK → users.contact_key | Contact key of second user |
 
 ### Chat Room ID Generation
 
 Private conversations are identified by deterministically sorting both user UUIDs and joining them:
 
 ```dart
-List<String> ids = [currentUserID, receiverID];
+List ids = [currentUserID, receiverID];
 ids.sort();
 String chatRoomID = ids.join('_');
 // e.g. "3a1b...ffe_9c2d...a04"
@@ -387,21 +394,21 @@ flutter run -d windows
 │              │   │              │   │              │
 └──────────────┘   └──────────────┘   └──────────────┘
 
-┌──────────────┐   ┌──────────────┐
-│              │   │              │
-│  REGISTER    │   │  SETTINGS    │
-│              │   │              │
-│  [icon]      │   │ ← Settings   │
-│              │   │──────────────│
-│  Let's start │   │ ┌──────────┐ │
-│  an account  │   │ │Dark Mode │ │
-│              │   │ │       ●  │ │
-│  [Email    ] │   │ └──────────┘ │
-│  [Password ] │   │              │
-│  [Confirm  ] │   │              │
-│  [Register ] │   │              │
-│              │   │              │
-└──────────────┘   └──────────────┘
+┌──────────────┐   ┌──────────────┐   ┌─────────────────┐
+│              │   │              │   │                 │
+│  REGISTER    │   │  SETTINGS    │   │  Friends Page   │
+│              │   │              │   │                 │
+│  [icon]      │   │ ← Settings   │   │                 │
+│              │   │──────────────│   │  add friend     │
+│  Let's start │   │ ┌──────────┐ │   │copy contact_key │
+│  an account  │   │ │Dark Mode │ │   │                 │
+│              │   │ │       ●  │ │   │                 │
+│  [Email    ] │   │ └──────────┘ │   │                 │
+│  [Password ] │   │              │   │                 │
+│  [Confirm  ] │   │              │   │                 │
+│  [Register ] │   │              │   │                 │
+│              │   │              │   │                 │
+└──────────────┘   └──────────────┘   └─────────────────|
 ```
 
 ---
