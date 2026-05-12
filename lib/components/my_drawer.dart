@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:message_app_flutter/Services/authentication/auth_service.dart';
+import 'package:message_app_flutter/pages/friends_page.dart';
 
 import '../pages/settings_page.dart';
 
@@ -18,6 +19,10 @@ void logout(){
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Column(children: [
+            
+            
+            
+            
             //logo
             DrawerHeader(
               child: Center(
@@ -28,6 +33,9 @@ void logout(){
                 ),
               ),
             ),
+            
+            
+            
             //home list
             Padding(
               padding: const EdgeInsets.only(left: 25.0),
@@ -40,6 +48,25 @@ void logout(){
                 },
               ),
             ),
+            
+
+
+            Padding(
+              padding: const EdgeInsets.only(left: 25.0),
+              child: ListTile(
+                title: Text("دوست"),
+                leading: Icon(Icons.people_sharp),
+                hoverColor: Color.fromARGB(0, 7, 238, 134),
+                onTap:(){
+                  //pop the drawer
+                  Navigator.pop(context);
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => FriendsPage()));
+                },
+              ),
+            ),
+            
+            
+            
             Padding(
               padding: const EdgeInsets.only(left: 25.0),
               child: ListTile(
@@ -57,6 +84,10 @@ void logout(){
             ),
 
           ],),
+          
+          
+          
+          
           Padding(
             padding: const EdgeInsets.only(left: 25.0, bottom: 40),
             child: ListTile(
@@ -72,3 +103,5 @@ void logout(){
   }
 
 }
+
+
