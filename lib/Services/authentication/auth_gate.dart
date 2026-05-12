@@ -18,7 +18,7 @@ class _AuthGateState extends State<AuthGate> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(milliseconds: 1700), () {
+    Future.delayed(const Duration(milliseconds: 3000), () {
       if (mounted) setState(() => _ready = true);
     });
   }
