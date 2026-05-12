@@ -3,6 +3,7 @@ import 'package:message_app_flutter/Services/authentication/auth_service.dart';
 import 'package:message_app_flutter/Services/chat/chat_services.dart';
 import 'package:message_app_flutter/components/chat_bubble.dart';
 import 'package:message_app_flutter/components/my_textfield.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class ChatPage extends StatefulWidget {
   final String receiverEmail;
@@ -83,7 +84,8 @@ class _ChatPageState extends State<ChatPage> {
       stream: _chatService.getMessages(widget.receiverID, senderID),
       builder: (context, snapshot) {
         if (snapshot.hasError) return const Center(child: Text("Error loading messages"));
-        if (snapshot.connectionState == ConnectionState.waiting) return const Center(child: CircularProgressIndicator());
+        final indicator = LoadingAnimationWidget.staggeredDotsWave(color: Theme.of(context).colorScheme.primary,size: 50,);
+        if (snapshot.connectionState == ConnectionState.waiting) return Center(child: indicator);
 
         final messages = snapshot.data ?? [];
 

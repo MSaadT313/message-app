@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:message_app_flutter/Services/authentication/auth_service.dart';
 import 'package:message_app_flutter/components/my_textfield.dart';
 import 'package:message_app_flutter/components/my_button.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class LoginPage extends StatefulWidget {
   final void Function()? onTap;
@@ -38,10 +39,11 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    final indicator = LoadingAnimationWidget.staggeredDotsWave(color: Theme.of(context).colorScheme.primary,size: 50,);
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
       body: _loading
-          ? const Center(child: CircularProgressIndicator())
+          ?  Center(child: indicator)
           : SizedBox(
               width: double.infinity,
               child: Column(

@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:message_app_flutter/Services/authentication/auth_service.dart';
 import 'package:message_app_flutter/pages/chat_page.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class FriendsPage extends StatefulWidget {
   const FriendsPage({super.key});
@@ -96,6 +97,7 @@ class _FriendsPageState extends State<FriendsPage> {
 
   @override
   Widget build(BuildContext context) {
+    final indicator = LoadingAnimationWidget.staggeredDotsWave(color: Theme.of(context).colorScheme.primary,size: 50,);
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: AppBar(
@@ -104,7 +106,7 @@ class _FriendsPageState extends State<FriendsPage> {
         elevation: 0,
       ),
       body: _loading
-          ? const Center(child: CircularProgressIndicator())
+          ? Center(child: indicator)
           : Padding(
               padding: const EdgeInsets.all(16),
               child: Column(

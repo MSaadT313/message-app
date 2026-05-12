@@ -4,6 +4,7 @@ import 'package:message_app_flutter/Services/chat/chat_services.dart';
 import 'package:message_app_flutter/components/my_drawer.dart';
 import 'package:message_app_flutter/pages/chat_page.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import '../components/user_tile.dart' show UserTile;
 
 class HomePage extends StatefulWidget {
@@ -86,7 +87,8 @@ class _HomePageState extends State<HomePage> {
       stream: _chatServices.getUsersStream(),
       builder: (context, snapshot) {
         if (snapshot.hasError) return const Center(child: Text("Error"));
-        if (snapshot.connectionState == ConnectionState.waiting) return const Center(child: CircularProgressIndicator());
+        final indicator = LoadingAnimationWidget.staggeredDotsWave(color: Theme.of(context).colorScheme.primary,size: 50,);
+        if (snapshot.connectionState == ConnectionState.waiting) return Center(child: indicator);
         if (!snapshot.hasData) return const Center(child: Text("No users found"));
 
         final filtered = snapshot.data!.where((u) {
