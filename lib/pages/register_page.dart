@@ -24,6 +24,7 @@ final void Function()? onTap;
             emailController.text, pwdController.text,
           );
         }catch (e){
+          if (!context.mounted) return;
           showDialog(
               context: context,
               builder: (context) => AlertDialog(
