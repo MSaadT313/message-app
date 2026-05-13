@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:message_app_flutter/pages/login_page.dart';
 import 'package:message_app_flutter/pages/register_page.dart';
 
-class LoginOrReigister extends StatefulWidget {
-  const LoginOrReigister({super.key});
+class LoginOrRegister extends StatefulWidget {
+  const LoginOrRegister({super.key});
 
   @override
-  State<LoginOrReigister> createState() => _LoginOrRegisterState();
+  State<LoginOrRegister> createState() => _LoginOrRegisterState();
 }
 //show the login page initially
 
-class _LoginOrRegisterState extends State<LoginOrReigister> {
+class _LoginOrRegisterState extends State<LoginOrRegister> {
   bool showLoginPage = true;
 void togglePages(){
   setState(() {

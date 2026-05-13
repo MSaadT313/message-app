@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:message_app_flutter/Services/authentication/auth_service.dart';
 import 'package:message_app_flutter/Services/chat/chat_services.dart';
 import 'package:message_app_flutter/components/chat_bubble.dart';
-import 'package:message_app_flutter/components/my_textfield.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:provider/provider.dart';
+import 'package:message_app_flutter/themes/theme_provider.dart';
+import 'package:message_app_flutter/global_variables.dart';
 
 class ChatPage extends StatefulWidget {
   final String receiverEmail;
@@ -64,15 +66,25 @@ class _ChatPageState extends State<ChatPage> {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: AppBar(
-        title: Text(widget.receiverEmail),
+        title: Text(widget.receiverEmail, style: TextStyle(fontSize: fontSizeAppBar, fontWeight: fontWeightBold)),
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
-      body: Column(
-        children: [
-          Expanded(child: _buildMessageList()),
-          _buildUserInput(),
-        ],
+      body: Container(
+        decoration: Provider.of<ThemeProvider>(context).currentWallpaper != null
+          ? BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage(Provider.of<ThemeProvider>(context).currentWallpaper!),
+                fit: BoxFit.cover,
+              ),
+            )
+          : null,
+        child: Column(
+          children: [
+            Expanded(child: _buildMessageList()),
+            _buildUserInput(),
+          ],
+        ),
       ),
     );
   }
@@ -119,14 +131,18 @@ class _ChatPageState extends State<ChatPage> {
       child: Row(
         children: [
           Expanded(
-            child: MyTextfield(
-              hintText: "اپنا پیغام پہنچائیں",
-              obscureText: false,
+            child: TextField(
               controller: _messageController,
               focusNode: myFocusNode,
+              decoration: InputDecoration(
+                hintText: "اپنا پیغام پہنچائیں",
+                hintStyle: TextStyle(color: Theme.of(context).colorScheme.tertiary),
+                contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
+              ),
+              onSubmitted: (_) => sendMessage(),
             ),
           ),
-          const SizedBox(width: 10),
+          const SizedBox(width: 12),
           Container(
             decoration: BoxDecoration(
               color: Theme.of(context).colorScheme.primary,

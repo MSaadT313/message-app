@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:message_app_flutter/global_variables.dart';
 
 class MyButton extends StatefulWidget {
   final void Function()? onTap;
@@ -21,19 +22,31 @@ class _MyButtonState extends State<MyButton> {
       child: GestureDetector(
         onTap: widget.onTap,
         child: AnimatedContainer(
-          duration: const Duration(milliseconds: 150),
+        duration: Duration(milliseconds: animationDurationFast),
+        curve: Curves.easeOutCubic,
           decoration: BoxDecoration(
-            color: _hovered
-                ? Theme.of(context).colorScheme.primary
-                : Theme.of(context).colorScheme.secondary,
-            borderRadius: BorderRadius.circular(8),
-            boxShadow: _hovered
-                ? [const BoxShadow(color: Colors.black26, blurRadius: 8, offset: Offset(0, 4))]
-                : [],
+            color: Theme.of(context).colorScheme.primary,
+            borderRadius: BorderRadius.circular(buttonBorderRadius),
+            boxShadow: showShadows ? [
+              BoxShadow(
+                color: Theme.of(context).colorScheme.primary.withValues(alpha: _hovered ? 0.4 : 0.2),
+                blurRadius: _hovered ? shadowBlurRadius * 2 : shadowBlurRadius,
+                offset: _hovered ? const Offset(0, 6) : shadowOffset,
+              )
+            ] : [],
           ),
-          padding: const EdgeInsets.all(25),
-          margin: const EdgeInsets.symmetric(horizontal: 25),
-          child: Center(child: Text(widget.text)),
+          padding: EdgeInsets.all(buttonPadding),
+          margin: EdgeInsets.symmetric(horizontal: buttonMarginHorizontal),
+          child: Center(
+            child: Text(
+              widget.text,
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: fontWeightBold,
+                fontSize: fontSizeBody,
+              ),
+            ),
+          ),
         ),
       ),
     );

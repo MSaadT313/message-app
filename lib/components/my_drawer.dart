@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:message_app_flutter/global_variables.dart';
 import 'package:message_app_flutter/Services/authentication/auth_service.dart';
 import 'package:message_app_flutter/pages/friends_page.dart';
 
@@ -14,7 +15,13 @@ void logout(){
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      backgroundColor: Theme.of(context).colorScheme.surface,
+      backgroundColor: Theme.of(context).colorScheme.surface.withValues(alpha: drawerOpacity),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topRight: Radius.circular(drawerBorderRadius),
+          bottomRight: Radius.circular(drawerBorderRadius),
+        ),
+      ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -29,7 +36,7 @@ void logout(){
                 child: Icon(
                   Icons.message,
                   color: Theme.of(context).colorScheme.primary,
-                  size: 40,
+                  size: drawerIconSize * 1.5,
                 ),
               ),
             ),
@@ -40,8 +47,8 @@ void logout(){
             Padding(
               padding: const EdgeInsets.only(left: 25.0),
               child: ListTile(
-                title: Text("واپسی"),
-                leading: Icon(Icons.home),
+                title: Text("واپسی", style: TextStyle(fontSize: fontSizeBody)),
+                leading: Icon(Icons.home, size: drawerIconSize),
                 onTap:(){
                   //pop the drawer
                   Navigator.pop(context);
@@ -54,8 +61,8 @@ void logout(){
             Padding(
               padding: const EdgeInsets.only(left: 25.0),
               child: ListTile(
-                title: Text("دوست"),
-                leading: Icon(Icons.people_sharp),
+                title: Text("دوست", style: TextStyle(fontSize: fontSizeBody)),
+                leading: Icon(Icons.people_sharp, size: drawerIconSize),
                 hoverColor: Color.fromARGB(0, 7, 238, 134),
                 onTap:(){
                   //pop the drawer
@@ -70,8 +77,8 @@ void logout(){
             Padding(
               padding: const EdgeInsets.only(left: 25.0),
               child: ListTile(
-                title: Text("تبدیلی"),
-                leading: Icon(Icons.settings),
+                title: Text("تبدیلی", style: TextStyle(fontSize: fontSizeBody)),
+                leading: Icon(Icons.settings, size: drawerIconSize),
                 onTap:(){
                   Navigator.pop(context);
                   Navigator.push(context,
@@ -91,8 +98,8 @@ void logout(){
           Padding(
             padding: const EdgeInsets.only(left: 25.0, bottom: 40),
             child: ListTile(
-              title: Text(" لاگ آؤٹ "),
-              leading: Icon(Icons.logout),
+              title: Text(" لاگ آؤٹ ", style: TextStyle(fontSize: fontSizeBody)),
+              leading: Icon(Icons.logout, size: drawerIconSize),
               onTap: logout,
             ),
           ),

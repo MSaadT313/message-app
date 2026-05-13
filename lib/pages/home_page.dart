@@ -3,6 +3,9 @@ import 'package:message_app_flutter/Services/authentication/auth_service.dart';
 import 'package:message_app_flutter/Services/chat/chat_services.dart';
 import 'package:message_app_flutter/components/my_drawer.dart';
 import 'package:message_app_flutter/pages/chat_page.dart';
+import 'package:provider/provider.dart';
+import 'package:message_app_flutter/themes/theme_provider.dart';
+import 'package:message_app_flutter/global_variables.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import '../components/user_tile.dart' show UserTile;
@@ -53,10 +56,17 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.surface,
-      appBar: AppBar(
-        title: const Text("کسی سے بات کرے"),
+    return Container(
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage(Provider.of<ThemeProvider>(context).globalBgPath),
+          fit: BoxFit.cover,
+        ),
+      ),
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        appBar: AppBar(
+        title: Text("کسی سے بات کرے", style: TextStyle(fontSize: fontSizeAppBar, fontWeight: fontWeightBold)),
         backgroundColor: Colors.transparent,
         foregroundColor: Colors.grey,
         elevation: 0,
@@ -65,19 +75,19 @@ class _HomePageState extends State<HomePage> {
       body: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: EdgeInsets.symmetric(horizontal: globalPadding, vertical: 8.0),
             child: TextField(
               controller: _searchController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 hintText: "دوسرے لوگوں کو ڈھونڈیں",
-                prefixIcon: const Icon(Icons.search),
-                border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+                prefixIcon: Icon(Icons.search),
               ),
               onChanged: (val) => setState(() => _searchQuery = val.toLowerCase()),
             ),
-          ),
-          Expanded(child: _buildUserList()),
-        ],
+            ),
+            Expanded(child: _buildUserList()),
+          ],
+        ),
       ),
     );
   }

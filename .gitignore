@@ -48,3 +48,4 @@ app.*.map.json
 #gitlab and github workflow
 .gitlab-ci.yml
 .github/*
+.aider*

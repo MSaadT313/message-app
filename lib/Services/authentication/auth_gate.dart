@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:message_app_flutter/Services/authentication/loginOrReigister.dart';
+import 'package:message_app_flutter/Services/authentication/login_or_register.dart';
 import 'package:message_app_flutter/pages/home_page.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
@@ -38,7 +38,7 @@ class _AuthGateState extends State<AuthGate> {
         if (snapshot.hasData && snapshot.data!.session != null) {
           return HomePage();
         }
-        return const LoginOrReigister();
+        return const LoginOrRegister();
       },
     );
   }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:message_app_flutter/global_variables.dart';
 
 class ChatBubble extends StatelessWidget {
   final String message;
@@ -12,18 +13,34 @@ class ChatBubble extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textColor = isCurrentUser
+        ? Colors.white
+        : Theme.of(context).colorScheme.inversePrimary;
+
     return Container(
       decoration: BoxDecoration(
         color: isCurrentUser
             ? Theme.of(context).colorScheme.primary
             : Theme.of(context).colorScheme.secondary,
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(chatBubbleRadius),
+          topRight: Radius.circular(chatBubbleRadius),
+          bottomLeft: Radius.circular(isCurrentUser ? chatBubbleRadius : 4),
+          bottomRight: Radius.circular(isCurrentUser ? 4 : chatBubbleRadius),
+        ),
+        boxShadow: showShadows ? [
+          BoxShadow(
+            color: Colors.black.withValues(alpha: shadowOpacity),
+            blurRadius: shadowBlurRadius / 2,
+            offset: shadowOffset,
+          ),
+        ] : [],
       ),
-      padding: const EdgeInsets.all(16),
-      margin: const EdgeInsets.symmetric(vertical: 2.5, horizontal: 25),
+      padding: EdgeInsets.symmetric(horizontal: chatBubblePaddingHorizontal, vertical: chatBubblePaddingVertical),
+      margin: const EdgeInsets.symmetric(vertical: 4, horizontal: 20),
       child: Text(
-          message,
-          style: TextStyle(color: Colors.white),
+        message,
+        style: TextStyle(color: textColor, fontSize: fontSizeBody),
       ),
     );
   }
