@@ -168,56 +168,11 @@ Authentication is handled entirely by **Supabase Auth** using the **Email** prov
 1. A record is inserted into `public.users` with the user's email and a generated `contact_key`.
 2. `AuthGate` listens to `onAuthStateChange` and routes to `HomePage` or `LoginPage` accordingly.
 
----
-
-## 🚀 Getting Started
 
 ### Prerequisites
 
 - Flutter SDK `>=3.0.0`
 - A Supabase project ([supabase.com](https://supabase.com))
-
-### Installation
-
-```bash
-# Clone the repository
-git clone https://github.com/your-username/taaluq.git
-cd taaluq
-
-# Install dependencies
-flutter pub get
-```
-
-### Configuration
-
-Create `lib/supabase_options.dart` (do **not** commit this file):
-
-```dart
-const String supabaseUrl = 'YOUR_SUPABASE_URL';
-const String supabaseAnonKey = 'YOUR_SUPABASE_ANON_KEY';
-```
-
-Add it to `.gitignore`:
-
-```
-lib/supabase_options.dart
-android/app/google-services.json
-```
-
-### Run
-
-```bash
-# Web
-flutter run -d chrome
-
-# Android
-flutter run -d android
-
-# Linux desktop
-flutter run -d linux
-```
-
----
 
 ## 🛠️ Tech Stack
 
