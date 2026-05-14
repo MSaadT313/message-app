@@ -37,6 +37,7 @@
 ## 📋 Table of Contents
 
 - [Overview](#-overview)
+- [Screenshots](#-screenshots)
 - [Features](#-features)
 - [Architecture](#-architecture)
 - [File Structure](#-file-structure)
@@ -57,6 +58,22 @@
 The app allows registered users to send and receive instant messages in private one-on-one chats, with a live-updating contact list and a toggleable dark/light theme.
 
 > **Academic Context:** This project showcases modern app development practices including reactive state management, backend-as-a-service integration, Row Level Security (RLS) policies, real-time data streams, and clean separation of concerns across service, model, and UI layers.
+
+---
+
+## 🖼️ Screenshots
+
+| Login | Signup | Home |
+| :---: | :---: | :---: |
+| ![Login](screenshots/login_page.png) | ![Signup](screenshots/signup_page.png) | ![Home](screenshots/home_page.png) |
+
+| Chat | Friends | Settings |
+| :---: | :---: | :---: |
+| ![Chat](screenshots/chat_page.png) | ![Friends](screenshots/friends_page.png) | ![Settings](screenshots/settings_page.png) |
+
+| Database Schema | Database Tables | Sidebar |
+| :---: | :---: | :---: |
+| ![Schema](screenshots/database_schema.png) | ![Tables](screenshots/database_tables.png) | ![Sidebar](screenshots/sidebar.png) |
 
 ---
 
@@ -483,11 +500,10 @@ This project follows these development conventions:
 
 | Name | Role | Responsibilities |
 |---|---|---|
-| — | Lead Developer | Flutter UI, Supabase integration, Auth flow |
-| — | Backend Developer | Database schema, RLS policies, Realtime config |
-| — | UI/UX Designer | Theme system, component design, screen layouts |
+| Fasih Ahmed | Lead Developer | Flutter UI, Supabase integration, Auth flow |
+| Saad Tahir | Backend Developer | Database schema, RLS policies, Realtime config |
+| Raed Ovais | UI/UX Designer | Theme system, component design, screen layouts |
 
-> *Add your team names and student IDs here.*
 
 </div>
 
