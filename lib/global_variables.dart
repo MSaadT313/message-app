@@ -1,70 +1,71 @@
 import 'package:flutter/material.dart';
 
-// --- Opacity Settings ---
-double cardOpacity = 1.0;      // Secondary container (cards, tiles)
-double primaryOpacity = 0.3;   // Primary color (buttons, current user bubbles)
-double textFieldOpacity = 1.0; // Input field background
-double drawerOpacity = 0.7;    // Drawer background opacity
+// ══════════════════════════════════════════════════════════
+//  TAALUQ — Global Design Tokens
+// ══════════════════════════════════════════════════════════
 
-// --- Size & Shape Settings ---
-double logoHeight = 120.0;
-double globalBorderRadius = 16.0;
-double chatBubbleRadius = 16.0;
-double userTileRadius = 32.0;
-double buttonBorderRadius = 16.0;
-double drawerBorderRadius = 0.0; // Usually 0 for full-height drawer
+// --- Opacity ---
+double cardOpacity = 1.0;
+double primaryOpacity = 1.0;
+double textFieldOpacity = 1.0;
+double drawerOpacity = 0.97;
+
+// --- Border Radius ---
+double globalBorderRadius = 20.0;
+double chatBubbleRadius = 18.0;
+double userTileRadius = 20.0;
+double buttonBorderRadius = 14.0;
+double drawerBorderRadius = 0.0;
+double cardBorderRadius = 20.0;
+double avatarBorderRadius = 14.0;
 
 // --- Avatar & Icon Sizes ---
-double userAvatarSize = 48.0;
-double userAvatarIconSize = 20.0;
-double drawerIconSize = 24.0;
-double searchIconSize = 24.0;
+double userAvatarSize = 52.0;
+double userAvatarIconSize = 22.0;
+double drawerIconSize = 22.0;
+double searchIconSize = 22.0;
 double appBarIconSize = 24.0;
+double logoHeight = 110.0;
 
-// --- Spacing & Padding ---
-double globalPadding = 16.0;
-double cardPadding = 16.0;
-double chatBubblePaddingVertical = 12.0;
+// --- Spacing ---
+double globalPadding = 20.0;
+double cardPadding = 18.0;
+double chatBubblePaddingVertical = 11.0;
 double chatBubblePaddingHorizontal = 16.0;
-double userTilePaddingVertical = 16.0;
+double userTilePaddingVertical = 14.0;
 double userTilePaddingHorizontal = 16.0;
-double userTileMarginVertical = 6.0;
+double userTileMarginVertical = 5.0;
 double userTileMarginHorizontal = 16.0;
-double buttonPadding = 20.0;
-double buttonMarginHorizontal = 25.0;
+double buttonPadding = 18.0;
+double buttonMarginHorizontal = 24.0;
 
 // --- Typography ---
-double fontSizeBody = 16.0;
-double fontSizeTitle = 28.0;
-double fontSizeAppBar = 20.0;
-double fontSizeSmall = 14.0;
-double fontSizeButton = 16.0;
-FontWeight fontWeightBold = FontWeight.bold;
+double fontSizeBody = 15.0;
+double fontSizeTitle = 26.0;
+double fontSizeAppBar = 18.0;
+double fontSizeSmall = 13.0;
+double fontSizeButton = 15.0;
+double fontSizeCaption = 12.0;
+FontWeight fontWeightBold = FontWeight.w700;
 FontWeight fontWeightSemiBold = FontWeight.w600;
-FontWeight fontWeightNormal = FontWeight.normal;
+FontWeight fontWeightMedium = FontWeight.w500;
+FontWeight fontWeightNormal = FontWeight.w400;
 
-// --- Shadows & Effects ---
+// --- Shadows ---
 bool showShadows = true;
-double shadowBlurRadius = 8.0;
-double shadowOpacity = 0.05;
-Offset shadowOffset = const Offset(0, 2);
+double shadowBlurRadius = 20.0;
+double shadowOpacity = 0.08;
+Offset shadowOffset = const Offset(0, 4);
 
-// --- Animation Durations ---
-int animationDurationFast = 200;
-int animationDurationNormal = 500;
+// --- Animation ---
+int animationDurationFast = 180;
+int animationDurationNormal = 320;
 
 // --- Component Heights ---
-double appBarHeight = 56.0;
-double searchBarHeight = 50.0;
-double drawerWidthFactor = 0.75; // 75% of screen width
+double appBarHeight = 60.0;
+double searchBarHeight = 52.0;
+double drawerWidthFactor = 0.78;
 
-// --- Specific Element Colors (Optional overrides) ---
-// Color? customPrimaryColor; // If you want to override theme colors easily
-
-
-// --- Box Style Settings ---
-bool useSquircleForTiles = true;
+// --- Glass ---
 bool useGlassmorphism = true;
-double glassBlur = 10.0;
-
-
+double glassBlur = 16.0;

@@ -56,26 +56,23 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage(Provider.of<ThemeProvider>(context).globalBgPath),
-          fit: BoxFit.cover,
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          "کسی سے بات کرے",
+          style: TextStyle(
+            fontSize: fontSizeAppBar,
+            fontWeight: fontWeightBold,
+          ),
         ),
-      ),
-      child: Scaffold(
         backgroundColor: Colors.transparent,
-        appBar: AppBar(
-        title: Text("کسی سے بات کرے", style: TextStyle(fontSize: fontSizeAppBar, fontWeight: fontWeightBold)),
-        backgroundColor: Colors.transparent,
-        foregroundColor: Colors.grey,
         elevation: 0,
       ),
       drawer: MyDrawer(),
       body: Column(
         children: [
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: globalPadding, vertical: 8.0),
+            padding: EdgeInsets.symmetric(horizontal: globalPadding, vertical: 8),
             child: TextField(
               controller: _searchController,
               decoration: const InputDecoration(
@@ -84,10 +81,9 @@ class _HomePageState extends State<HomePage> {
               ),
               onChanged: (val) => setState(() => _searchQuery = val.toLowerCase()),
             ),
-            ),
-            Expanded(child: _buildUserList()),
-          ],
-        ),
+          ),
+          Expanded(child: _buildUserList()),
+        ],
       ),
     );
   }

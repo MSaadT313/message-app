@@ -5,28 +5,46 @@ import 'package:provider/provider.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:message_app_flutter/supabase_options.dart';
 
-void main() async {
+Future<void> main() async {
+
   WidgetsFlutterBinding.ensureInitialized();
 
-  await Supabase.initialize(url:SupabaseOptions.url,anonKey: SupabaseOptions.anonKey);
+  await Supabase.initialize(
+    url: SupabaseOptions.url,
+    anonKey: SupabaseOptions.anonKey,
+  );
 
   runApp(
-    ChangeNotifierProvider(
+
+    ChangeNotifierProvider<ThemeProvider>(
+
       create: (_) => ThemeProvider(),
+
       child: const MyApp(),
     ),
   );
 }
 
 class MyApp extends StatelessWidget {
+
   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: const AuthGate(),
-      theme: Provider.of<ThemeProvider>(context).themeData,
+
+    return Consumer<ThemeProvider>(
+
+      builder: (context, themeProvider, child) {
+
+        return MaterialApp(
+
+          debugShowCheckedModeBanner: false,
+
+          theme: themeProvider.themeData,
+
+          home: const AuthGate(),
+        );
+      },
     );
   }
 }
